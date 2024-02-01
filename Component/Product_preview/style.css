@@ -7,7 +7,7 @@
 * {
     margin: 0;
     padding: 0;
-    /* line-height: 1.5; */
+    line-height: 1.5;
 }
 
 html {
@@ -39,4 +39,83 @@ button {
     background: none;
     color: inherit;
     cursor: pointer;
+}
+
+:root {
+    --clr-primary-400: hsl(158, 36%, 37%);
+    --clr-secondary-200: hsl(30, 38%, 92%);
+
+    --clr-neutral-900: hsl(212, 21%, 14%);
+    --clr-neutral-400: hsl(228, 12%, 48%);
+    --clr-neutral-100: hsl(0, 0%, 100%);
+    --ff-accent: 'Fraunces', serif;
+    --ff-base: 'Montserrat', sans-serif;
+
+    --fw-regular: 500;
+    --fw-bold: 700;
+}
+
+/* General styling */
+body {
+    font-family: var(--ff-base);
+    font-weight: var(--fw-regular);
+    font-size: 0.875rem;
+    color: var(--clr-neutral-400);
+    background-color: var(--clr-secondary-200);
+
+    /* For this card only */
+    display: grid;
+    place-content: center;
+    /* Vertically center */
+    min-height: 100vh;
+
+    margin: 1rem;
+}
+
+/* Utilities */
+.flex-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Product */
+.product {
+    --content-padding: 1.5rem;
+    --content-spacing: 1rem;
+    background-color: var(--clr-neutral-100);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.product__content {
+    border: 3px solid purple;
+    padding: var(--content-padding);
+    /* btn can strech automatically */
+    display: grid;
+    gap: var(--content-spacing);
+}
+
+.product__category {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 0.81 5rem;
+}
+
+.product__title {
+    font-size: 2rem;
+    font-family: var(--ff-accent);
+    color: var(--clr-neutral-900);
+    line-height: 1.1;
+}
+
+.product__price {
+    font-size: 2rem;
+    font-family: var(--ff-accent);
+    color: var(--clr-primary-400);
+}
+
+.btn {
+    background-color: var(--clr-primary-400);
 }
