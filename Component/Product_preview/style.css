@@ -143,21 +143,14 @@ body {
     font-weight: var(--fw-bold);
 }
 
-.btn[data-icon="shopping-cart"]::before{
+.btn[data-icon="shopping-cart"]::before {
     content: "";
     width: 15px;
     height: 16px;
-/* background-color: pink; */
-background-image: url(./images/icon-cart.svg);
-
-
+    /* background-color: pink; */
+    background-image: url(./images/icon-cart.svg);
 }
 
-
-
-
-
-
-.button:is(:hover, :focus){
-    background-color: var(--clr-primary-500) ;
+.button:is(:hover, :focus) {
+    background-color: var(--clr-primary-500);
 }
