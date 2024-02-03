@@ -95,9 +95,19 @@ body {
 .product {
     --content-padding: 1.5rem;
     --content-spacing: 1rem;
+    display: grid;
     background-color: var(--clr-neutral-100);
     border-radius: 0.5rem;
     overflow: hidden;
+    /* Prevent stretching */
+    max-width: 600px;
+}
+
+@media (min-width:600px) {
+    .product {
+        --content-padding: 2rem;
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .product__content {
@@ -153,4 +163,8 @@ body {
 
 .button:is(:hover, :focus) {
     background-color: var(--clr-primary-500);
+}
+
+.attribution {
+    margin-top:5rem;
 }
