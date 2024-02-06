@@ -1,6 +1,7 @@
 let buttonColours = ["red", "blue", "green", "yellow"];
 let gamePattern = [];
 let userClickedPattern = [];
+let level = 0;
 
 $(".btn").on("click", function () {
   let userChosenColour = $(this).attr("id");
@@ -33,6 +34,9 @@ function nextSequence() {
   // let audio = new Audio("sounds/" + randomChosenColour + ".mp3");
   // audio.play();
   playSound(randomChosenColour);
+
+  level++;
+  $("#level-title").replaceWith("<h1>Level ${level}</h1>");
 }
 
 function playSound(name) {
@@ -54,4 +58,7 @@ $("document").on("keydown", function(){
   let tapCount = 0;
   tapCount > 1 ? false : nextSequence();
   tapCount++;
+  // Notice starting level
+  $("#level-title").replaceWith("<h1>Level 0</h1>");
+  
 })
