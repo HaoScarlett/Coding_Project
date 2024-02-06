@@ -25,16 +25,14 @@ $(".btn").on("click", function () {
   // Debugger
   console.log(userClickedPattern);
 
-  // Call checkAnswer() after a user has clicked and chosen their answer, 
-  // passing in the index of the last answer in the user's sequence.(?)
-  checkAnswer();
-  
-
   // let audio = new Audio("sounds/" + userChosenColour + ".mp3");
   // audio.play();
   playSound(userChosenColour);
-
   animatePress(userChosenColour);
+
+  // Call checkAnswer() after a user has clicked and chosen their answer,
+  // 🔸 the argument: the index of the last answer in the user's sequence.(?)
+  checkAnswer(userClickedPattern.length - 1);
 });
 
 function nextSequence() {
@@ -88,7 +86,10 @@ function checkAnswer(currentLevel) {
     // If the user got the most recent answer right in step 3,
     // check that they have finished their sequence
     if (userClickedPattern.length === gamePattern.length) {
-      setTimeout(nextSequence(), 1000);
+      // Call nextSequence() after a 1000 millisecond delay.
+      setTimeout(function () {
+        nextSequence();
+      }, 1000);
       userClickedPattern = [];
     }
   } else {
