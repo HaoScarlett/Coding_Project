@@ -47,3 +47,11 @@ function animatePress(currentColour) {
     $("#" + currentColour).removeClass("pressed");
   }, 100);
 }
+
+// Start the Game. Detect a keypress
+// Only call nextSequence() on the first keypress 
+$("document").on("keydown", function(){
+  let tapCount = 0;
+  tapCount > 1 ? false : nextSequence();
+  tapCount++;
+})
