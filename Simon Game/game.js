@@ -97,13 +97,14 @@ function checkAnswer(currentLevel) {
     console.log("Wrong.");
 
     // Game over part
+    // 🔸 wrong need the ""
     playSound("wrong");
-    setTimeout(function () {
-      $("body").addClass("game-over");
-    }, 0);
+    // Game over background color flash effect
+    $("body").addClass("game-over");
     setTimeout(function () {
       $("body").removeClass("game-over");
     }, 200);
-    $("h1").text("Game Over, Press Any Key to Restart");
+
+    $("#level-title").text("Game Over, Press Any Key to Restart");
   }
 }
