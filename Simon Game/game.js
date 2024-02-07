@@ -6,7 +6,7 @@ let started = false;
 let level = 0;
 
 // Keypress fn
-$(document).on("keydown", function () {
+$(document).on("keypress", function () {
   if (!started) {
     // when the game start, change title to "Level 0"
     $("#level-title").text("Level " + level);
@@ -93,6 +93,17 @@ function checkAnswer(currentLevel) {
       userClickedPattern = [];
     }
   } else {
+    // Debugger
     console.log("Wrong.");
+
+    // Game over part
+    playSound("wrong");
+    setTimeout(function () {
+      $("body").addClass("game-over");
+    }, 0);
+    setTimeout(function () {
+      $("body").removeClass("game-over");
+    }, 200);
+    $("h1").text("Game Over, Press Any Key to Restart");
   }
 }
