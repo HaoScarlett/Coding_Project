@@ -18,6 +18,7 @@ $(document).on("keypress", function () {
   // Notice starting level
 });
 
+// Button click fn
 $(".btn").on("click", function () {
   let userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
@@ -64,19 +65,6 @@ function nextSequence() {
   playSound(randomChosenColour);
 }
 
-function playSound(name) {
-  let audio = new Audio("sounds/" + name + ".mp3");
-  audio.play();
-}
-
-// Add animation to user clicks
-function animatePress(currentColour) {
-  $("#" + currentColour).addClass("pressed");
-  setTimeout(() => {
-    $("#" + currentColour).removeClass("pressed");
-  }, 100);
-}
-
 // Check user input and the Game sequence
 function checkAnswer(currentLevel) {
   // check if the most recent user answer is the same as the game pattern
@@ -106,5 +94,30 @@ function checkAnswer(currentLevel) {
     }, 200);
 
     $("#level-title").text("Game Over, Press Any Key to Restart");
+
+    // Reset the game
+    startOver();
   }
+}
+
+function playSound(name) {
+  let audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
+}
+
+// Add animation to user clicks
+function animatePress(currentColour) {
+  $("#" + currentColour).addClass("pressed");
+  setTimeout(() => {
+    $("#" + currentColour).removeClass("pressed");
+  }, 100);
+}
+
+// Start over
+function startOver() {
+  level = 0;
+  started = false;
+  gamePattern = [];
+  // clear previous user pattern as well
+  userClickedPattern = [];
 }
