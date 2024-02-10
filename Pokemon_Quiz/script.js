@@ -54,11 +54,28 @@ async function loadOptions() {
     while (optionsIds.includes(randomPokemonId)) {
       randomPokemonId = getRandomPokemonId();
     }
+    optionsIds.push(randomPokemonId);
+    // 9.3 Fetching a random pokemon with the newly made ID,
+    // and adding it to the options array.
+    const randomPokemon = await fetchPokemonById(randomPokemonId);
+    const randomOption = randomPokemon.name;
+    options.push(randomOption);
+
+    // Test
+    // console.log(options);
+    // console.log(optionsIds);
   }
+
+  //   shuffleArray to mix options
+  shuffleArray(options);
 }
 
 // --- UTILITY FUNCTIONS ---
 // 4.  Function to randomize the pokemon ID
 function getRandomPokemonId() {
   return Math.floor(Math.random() * 151) + 1;
+}
+
+function shuffleArray(options) {
+    
 }
