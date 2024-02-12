@@ -9,7 +9,8 @@ const loadingContainer = document.getElementById("loadingContainer");
 
 // 7. Initialize variables
 let usedPokemonIds = [];
-
+let count = 0; // 14.3
+let points = 0; // 14.8
 // Challenge: make a request to API, it takes time
 // asynchronous functionality
 // 2. Fetch one Pokemon with an ID
@@ -76,12 +77,35 @@ async function loadOptions() {
 
   // 13. Create options HTML elements from options array in the DOM
   optionsContainer.innerHTML = ""; //Reset
-  options.forEach((option, index) => {
+  options.forEach((option) => {
     const button = document.createElement("button");
     button.textContent = option;
-    button.onclick = (event) => checkAnswer();
-    optionsContainer.appendChild(button);
+    button.onclick = (event) => checkAnswer(option === pokemon.name, event);
+    optionsContainer.appendChild(button); // Add the btns back
   });
+}
+
+// 14. Create check answer function
+function checkAnswer(isCorrect, event) {
+  // 14.1 Check if any btn is already selected.
+  // if falsy => no element => null
+  const selectedButton = document.querySelector(".selected");
+  // 14.2 if truthy, do nothing, exit the function
+  if (selectedButton) {
+    return;
+  }
+  // 14.4 else mark the clicked bt as selected and increase the count by 1
+  event.target.classList.add("selected");
+  count++;
+  totalCount.textContent = count;
+
+  if (isCorrect) {
+    displayResult("Correct Answer!");
+    // 14.8 Increment the points by 1
+    points++;
+    pointsElement.textContent = points;
+    event.target.classList.add("correct");
+  }
 }
 
 // --- UTILITY FUNCTIONS ---
@@ -93,4 +117,9 @@ function getRandomPokemonId() {
 // 11. Shuffle the array
 function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);
+}
+
+// 14.5 Function to update the result text and class name
+function displayResult(result) {
+  resultElement.textContent = result;
 }
