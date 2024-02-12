@@ -8,15 +8,18 @@ const mainContainer = document.getElementsByClassName("container");
 const loadingContainer = document.getElementById("loadingContainer");
 
 // 7.1 Initialize variables
-let usedPokemonIds = [];
+let usedPokemonIds = []; // Array to store the list of displayed pokemons
+let showLoading = false; // 15.1 Boolean used to determin DOM elements shown
 let count = 0; // 14.3
 let points = 0; // 14.8
-let showLoading = false;
+
 // Challenge: make a request to API, it takes time
 // asynchronous functionality
 // 2. Fetch one Pokemon with an ID
 async function fetchPokemonById(id) {
+  // 15.3 Show loading while fetching data.
   showLoading = true;
+  // 2.1
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   // Take the response and transform it to json format
   const data = await response.json();
@@ -31,6 +34,7 @@ async function fetchPokemonById(id) {
 
 // 5. Function to load questioin with options
 async function loadQuestionWithOptions() {
+  // 15.4 Show loading / show puzzle based on showLoading boolean
   if (showLoading) {
     showLoadingWindow();
     hidePuzzleWindow();
@@ -43,6 +47,7 @@ async function loadQuestionWithOptions() {
   while (usedPokemonIds.includes(pokemonId)) {
     pokemonId = getRandomPokemonId();
   }
+
   // 7.3 If pokemon has not been displayed, it's added
   //   to usedPokemonIds. It's set as a new const
   //   pokemon.
@@ -57,13 +62,14 @@ async function loadQuestionWithOptions() {
   //   9. Fetch addtional random Pokemon names as options
   while (options.length < 4) {
     let randomPokemonId = getRandomPokemonId();
-    // 9.2 Ensure fetched option doesn't exist in the options list.
+    // 9.1 Ensure fetched option doesn't exist in the options list.
     // Creates a new random id until it doesn't exist in optionsIds.
     while (optionsIds.includes(randomPokemonId)) {
       randomPokemonId = getRandomPokemonId();
     }
     optionsIds.push(randomPokemonId);
-    // 9.3 Fetching a random pokemon with the newly made ID,
+
+    // 9.2 Fetching a random pokemon with the newly made ID,
     // and adding it to the options array.
     const randomPokemon = await fetchPokemonById(randomPokemonId);
     const randomOption = randomPokemon.name;
@@ -72,13 +78,14 @@ async function loadQuestionWithOptions() {
     // Test
     console.log(options);
     console.log(optionsIds);
+
     // 15.5 Turn off loading if all options have been fetched.
     if (options.length === 4) {
       showLoading = false;
     }
   }
 
-  //   shuffleArray to mix options
+  //   11.2 shuffleArray to mix options
   shuffleArray(options);
 
   // 12. Clear any previous result and update pokemon image to fetched
@@ -102,6 +109,9 @@ async function loadQuestionWithOptions() {
   }
 }
 
+// 🔺 10. Inital load
+loadQuestionWithOptions();
+
 // 14. Create check answer function
 function checkAnswer(isCorrect, event) {
   // 14.1 Check if any btn is already selected.
@@ -116,14 +126,16 @@ function checkAnswer(isCorrect, event) {
   count++;
   totalCount.textContent = count;
 
+  // 14.5 Choose text for right/wrong answer
   if (isCorrect) {
+    // 14.7 Call displayResult function
     displayResult("Correct Answer!");
     // 14.8 Increment the points by 1
     points++;
     pointsElement.textContent = points;
     event.target.classList.add("correct");
   } else {
-    displayResult("Wrong Answer...");
+    displayResult("Wrong Answer...","wrong");
     event.target.classList.add("wrong");
   }
 
@@ -151,7 +163,7 @@ function displayResult(result) {
   resultElement.textContent = result;
 }
 
-//  16. Hide loading
+//  16. Hide loading window
 function hideLoadingWindow() {
   loadingContainer.classList.add("hide");
 }
@@ -171,8 +183,6 @@ function showPuzzleWindow() {
 }
 
 // 19. Hide puzzle window
-function hidePuzzleWindow(){
+function hidePuzzleWindow() {
   mainContainer[0].classList.add("hide");
-
-  
 }
