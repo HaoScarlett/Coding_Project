@@ -7,7 +7,7 @@ const totalCount = document.getElementById("totalCount");
 const mainContainer = document.getElementsByClassName("container");
 const loadingContainer = document.getElementById("loadingContainer");
 
-// 7. Initialize variables
+// 7.1 Initialize variables
 let usedPokemonIds = [];
 let count = 0; // 14.3
 let points = 0; // 14.8
