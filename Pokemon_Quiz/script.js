@@ -68,6 +68,11 @@ async function loadOptions() {
 
   //   shuffleArray to mix options
   shuffleArray(options);
+
+  // 12. Clear any previous result and update pokemon image to fetched
+  // image URL from the sprites.
+  resultElement.textContent = "Who's that Pokemon?";
+  pokemonImageElement.src = pokemon.sprites.other.dream_world.front_default;
 }
 
 // --- UTILITY FUNCTIONS ---
@@ -76,6 +81,7 @@ function getRandomPokemonId() {
   return Math.floor(Math.random() * 151) + 1;
 }
 
-function shuffleArray(options) {
-    
+// 11. Shuffle the array
+function shuffleArray(array) {
+  return array.sort(() => Math.random() - 0.5);
 }
