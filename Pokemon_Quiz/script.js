@@ -11,6 +11,7 @@ const loadingContainer = document.getElementById("loadingContainer");
 let usedPokemonIds = [];
 let count = 0; // 14.3
 let points = 0; // 14.8
+let showLoading = false;
 // Challenge: make a request to API, it takes time
 // asynchronous functionality
 // 2. Fetch one Pokemon with an ID
@@ -28,7 +29,7 @@ async function fetchPokemonById(id) {
 // }
 
 // 5. Function to load questioin with options
-async function loadOptions() {
+async function loadQuestionWithOptions() {
   // 6. Fetch the correct answer first
   let pokemonId = getRandomPokemonId();
 
@@ -105,7 +106,17 @@ function checkAnswer(isCorrect, event) {
     points++;
     pointsElement.textContent = points;
     event.target.classList.add("correct");
+  } else {
+    displayResult("Wrong Answer...");
+    event.target.classList.add("wrong");
   }
+
+  // 14.9 Load the next question with 1 sec delay for the user
+  // to read the result.
+  setTimeout(() => {
+    showLoading = true;
+    loadQuestionWithOptions();
+  }, 1000);
 }
 
 // --- UTILITY FUNCTIONS ---
