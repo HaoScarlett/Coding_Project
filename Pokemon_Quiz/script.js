@@ -74,7 +74,14 @@ async function loadOptions() {
   resultElement.textContent = "Who's that Pokemon?";
   pokemonImageElement.src = pokemon.sprites.other.dream_world.front_default;
 
-
+  // 13. Create options HTML elements from options array in the DOM
+  optionsContainer.innerHTML = ""; //Reset
+  options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.textContent = option;
+    button.onclick = (event) => checkAnswer();
+    optionsContainer.appendChild(button);
+  });
 }
 
 // --- UTILITY FUNCTIONS ---
