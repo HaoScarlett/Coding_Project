@@ -1,6 +1,6 @@
 // 1. Get the Dom
 const resultElement = document.getElementById("result");
-const pokemonImage = document.getElementById("pokemonImage");
+const pokemonImageElement = document.getElementById("pokemonImage");
 const optionsContainer = document.getElementById("options");
 const pointsElement = document.getElementById("pointsValue");
 const totalCount = document.getElementById("totalCount");
@@ -62,8 +62,8 @@ async function loadOptions() {
     options.push(randomOption);
 
     // Test
-    // console.log(options);
-    // console.log(optionsIds);
+    console.log(options);
+    console.log(optionsIds);
   }
 
   //   shuffleArray to mix options
@@ -73,6 +73,8 @@ async function loadOptions() {
   // image URL from the sprites.
   resultElement.textContent = "Who's that Pokemon?";
   pokemonImageElement.src = pokemon.sprites.other.dream_world.front_default;
+
+
 }
 
 // --- UTILITY FUNCTIONS ---
