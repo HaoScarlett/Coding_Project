@@ -4,7 +4,7 @@ const pokemonImageElement = document.getElementById("pokemonImage");
 const optionsContainer = document.getElementById("options");
 const pointsElement = document.getElementById("pointsValue");
 const totalCount = document.getElementById("totalCount");
-const mainContainer = document.getElementById("container");
+const mainContainer = document.getElementsByClassName("container");
 const loadingContainer = document.getElementById("loadingContainer");
 
 // 7. Initialize variables
@@ -16,6 +16,7 @@ let showLoading = false;
 // asynchronous functionality
 // 2. Fetch one Pokemon with an ID
 async function fetchPokemonById(id) {
+  showLoading = true;
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   // Take the response and transform it to json format
   const data = await response.json();
@@ -30,6 +31,11 @@ async function fetchPokemonById(id) {
 
 // 5. Function to load questioin with options
 async function loadQuestionWithOptions() {
+  if (showLoading) {
+    showLoadingWindow();
+    hidePuzzleWindow();
+  }
+
   // 6. Fetch the correct answer first
   let pokemonId = getRandomPokemonId();
 
@@ -66,6 +72,10 @@ async function loadQuestionWithOptions() {
     // Test
     console.log(options);
     console.log(optionsIds);
+    // 15.5 Turn off loading if all options have been fetched.
+    if (options.length === 4) {
+      showLoading = false;
+    }
   }
 
   //   shuffleArray to mix options
@@ -84,6 +94,12 @@ async function loadQuestionWithOptions() {
     button.onclick = (event) => checkAnswer(option === pokemon.name, event);
     optionsContainer.appendChild(button); // Add the btns back
   });
+
+  // 15. Switch between loading and puzzle windows
+  if (!showLoading) {
+    hideLoadingWindow();
+    showPuzzleWindow();
+  }
 }
 
 // 14. Create check answer function
@@ -133,4 +149,30 @@ function shuffleArray(array) {
 // 14.5 Function to update the result text and class name
 function displayResult(result) {
   resultElement.textContent = result;
+}
+
+//  16. Hide loading
+function hideLoadingWindow() {
+  loadingContainer.classList.add("hide");
+}
+
+// 17. Show loading window
+function showLoadingWindow() {
+  mainContainer[0].classList.remove("show");
+  loadingContainer.classList.remove("hide");
+  loadingContainer.classList.add("show");
+}
+
+// 18. Show puzzle window
+function showPuzzleWindow() {
+  loadingContainer.classList.remove("show");
+  mainContainer[0].classList.remove("hide");
+  mainContainer[0].classList.add("show");
+}
+
+// 19. Hide puzzle window
+function hidePuzzleWindow(){
+  mainContainer[0].classList.add("hide");
+
+  
 }
