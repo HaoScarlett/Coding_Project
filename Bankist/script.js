@@ -1,5 +1,14 @@
 "use strict";
-const header = document.querySelector('.header');
+const header = document.querySelector(".header");
+const btnScrollTo = document.querySelector(".btn--scroll-to");
+const section1 = document.querySelector("#section--1");
+
+// Smooth scrolling from hero to section 1
+btnScrollTo.addEventListener("click", function (event) {
+  const s1coords = section1.getBoundingClientRect();
+  section1.scrollIntoView({ behavior: "smooth" }); 
+});
+
 ///////////////////////////////////////
 // Modal window
 
@@ -39,4 +48,9 @@ const cookieMessage = document.createElement("div");
 cookieMessage.classList.add("cookie-message");
 cookieMessage.innerHTML =
   'We use cookies for improving analytics. <button class="btn btn--close-cookie">Got it.</button>';
-header.prepend(cookieMessage);
+header.append(cookieMessage);
+document
+  .querySelector(".btn--close-cookie")
+  .addEventListener("click", function () {
+    cookieMessage.remove();
+  });
