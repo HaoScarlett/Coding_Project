@@ -3,14 +3,29 @@ const header = document.querySelector(".header");
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
 
-// Smooth scrolling from hero to section 1
-btnScrollTo.addEventListener("click", function (event) {
-  const s1coords = section1.getBoundingClientRect();
-  section1.scrollIntoView({ behavior: "smooth" }); 
+//-------- Nav bar scroll --------//
+// Touch every link and add the same fn to them. It's not efficient.
+// document.querySelectorAll(".nav__link").forEach(function (el) {
+//   el.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute("href");
+//     document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+//   });
+// });
+
+// Better solution: Target the common parent element
+// then determine what element originated the event
+document.querySelector(".nav__links").addEventListener("click", function (e) {
+  e.preventDefault();
+  // Matching strategy: only trigger the event when target link is clicked
+  if (e.target.classList.contains("nav__link")) {
+    const id = e.target.getAttribute("href");
+    document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+  }
 });
 
-///////////////////////////////////////
-// Modal window
+//-------- Modal window --------//
+
 
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
