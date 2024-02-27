@@ -3,6 +3,11 @@ const header = document.querySelector(".header");
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
 const h1 = document.querySelector('h1');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+
 //-------- Nav bar scroll --------//
 // Touch every link and add the same fn to them. It's not efficient.
 // document.querySelectorAll(".nav__link").forEach(function (el) {
@@ -35,6 +40,18 @@ const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const btnCloseModal = document.querySelector(".btn--close-modal");
 const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
+
+// ----- Tab components -----
+//🔸 Events delegation
+tabsContainer.addEventListener('click', function(e){
+  // span is also a child
+  const clicked = e.target.closest('.operations__tab');
+  //  Guard clause
+  if(!clicked) return;
+  
+  clicked.classList.add('operations__tab--active');
+});
+
 
 // ----- Utility Functions -----
 const openModal = function (event) {
