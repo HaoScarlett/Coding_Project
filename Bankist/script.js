@@ -2,7 +2,7 @@
 const header = document.querySelector(".header");
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
-
+const h1 = document.querySelector('h1');
 //-------- Nav bar scroll --------//
 // Touch every link and add the same fn to them. It's not efficient.
 // document.querySelectorAll(".nav__link").forEach(function (el) {
@@ -24,9 +24,13 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
   }
 });
 
+//-------- H1 Dom traversing --------//
+// h1.querySelectorAll('.highlight') 
+h1.firstElementChild.style.color = "white";
+// h1.closest('.header').style.background = "pink"
+
+
 //-------- Modal window --------//
-
-
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const btnCloseModal = document.querySelector(".btn--close-modal");
