@@ -1,26 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="index.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>Tic Tac Toe</title>
-</head>
-<body>
-    <h1>
-        hello
-    </h1>
-    <div id="grid">
-        <div id="grid__square-1" class="grid__square"></div>
-        <div id="grid__square-2" class="grid__square"></div>
-        <div id="grid__square-3" class="grid__square"></div>
-        <div id="grid__square-4" class="grid__square"></div>
-        <div id="grid__square-5" class="grid__square"></div>
-        <div id="grid__square-6" class="grid__square"></div>
-        <div id="grid__square-7" class="grid__square"></div>
-        <div id="grid__square-8" class="grid__square"></div>
-        <div id="grid__square-9" class="grid__square"></div>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="index.js" defer></script>
+        <link rel="stylesheet" href="style.css">
+        <title>Tic Tac Toe</title>
+    </head>
+    <body>
+        <div id="info">
+            <h2 id="info__title">
+                Tic Tac Toe
+            </h2>
+            <div class="info__player">
+                <img src="asset/cross.png" alt="Player 1 icon"
+                    class="info__player__icon">
+                <h1 id="info__player__name1">Player 1</h1>
+                <h1 id="info__player__score1">0</h1>
+            </div>
+            <div class="info__player">
+                <img src="asset/circle.png" alt="Player 2 icon"
+                    class="info__player__icon">
+                <h1 id="info__player__name2">Player 2</h1>
+                <h1 id="info__player__score2">0</h1>
+            </div>
+        </div>
+        <div id="grid">
+            <div id="grid__square-1" class="grid__square"></div>
+            <div id="grid__square-2" class="grid__square"></div>
+            <div id="grid__square-3" class="grid__square"></div>
+            <div id="grid__square-4" class="grid__square"></div>
+            <div id="grid__square-5" class="grid__square"></div>
+            <div id="grid__square-6" class="grid__square"></div>
+            <div id="grid__square-7" class="grid__square"></div>
+            <div id="grid__square-8" class="grid__square"></div>
+            <div id="grid__square-9" class="grid__square"></div>
+        </div>
+        <div id="instructions">
+            <h2 id="instruction__text">Click the button to start</h2>
+            <button id="instruction__btn">Start Game</button>
+
+        </div>
+        <div id="model">
+            <div id="model__content">
+                <h2>Enter Player name</h2>
+                <form>
+                    <!-- Label: for accessibility -->
+                    <label for="player1">Player 1</label>
+                    <input type="text" id="player1" name="player1"
+                        placeholder="Player 1" maxlength="6" required>
+                    <label for="player2">Player 2</label>
+                    <input type="text" id="player2" name="player2"
+                        placeholder="Player 2" maxlength="6" required>
+                    <input type="submit" value="Start Game">
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
