@@ -2,11 +2,10 @@
 const header = document.querySelector(".header");
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
-const h1 = document.querySelector('h1');
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-
+const h1 = document.querySelector("h1");
+const tabs = document.querySelectorAll(".operations__tab");
+const tabsContainer = document.querySelector(".operations__tab-container");
+const tabsContent = document.querySelectorAll(".operations__content");
 
 //-------- Nav bar scroll --------//
 // Touch every link and add the same fn to them. It's not efficient.
@@ -30,10 +29,9 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
 });
 
 //-------- H1 Dom traversing --------//
-// h1.querySelectorAll('.highlight') 
+// h1.querySelectorAll('.highlight')
 h1.firstElementChild.style.color = "white";
 // h1.closest('.header').style.background = "pink"
-
 
 //-------- Modal window --------//
 const modal = document.querySelector(".modal");
@@ -43,15 +41,23 @@ const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
 
 // ----- Tab components -----
 //🔸 Events delegation
-tabsContainer.addEventListener('click', function(e){
+tabsContainer.addEventListener("click", function (e) {
   // span is also a child
-  const clicked = e.target.closest('.operations__tab');
+  const clicked = e.target.closest(".operations__tab");
   //  Guard clause
-  if(!clicked) return;
-  
-  clicked.classList.add('operations__tab--active');
-});
+  if (!clicked) return;
 
+  // Only one tab animate at once
+  tabs.forEach((t) => t.classList.remove("operations__tab--active"));
+  clicked.classList.add("operations__tab--active");
+
+  // Activate content area
+  // Manipulate css classes
+  tabsContent.forEach((c) => c.classList.remove("operations__content--active"));
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add("operations__content--active");
+});
 
 // ----- Utility Functions -----
 const openModal = function (event) {
