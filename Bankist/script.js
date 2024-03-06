@@ -29,7 +29,7 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
 });
 
 //-------- Menu fade animation --------//
-nav.addEventListener("mouseover", function (e) {
+const handleHover = function (e) {
   if (e.target.classList.contains("nav__link")) {
     const link = e.target;
     // Use parent-children relationship to select all the nav links
@@ -37,12 +37,20 @@ nav.addEventListener("mouseover", function (e) {
     const logo = link.closest(".nav").querySelector("img");
 
     siblings.forEach((el) => {
-      if (el !== link) el.style.opacity = 0.5;
+      if (el !== link) el.style.opacity = this;
     });
-    logo.style.opacity = 0.5;
+    logo.style.opacity = this;
   }
-});
-nav.addEventListener("mouseout", function (e) {});
+};
+
+// 🔻nav.addEventListener("mouseover", handleHover(e, 0.5));
+// addE waits for a function. If you call it directly, it becomes other values.
+
+// 🔻nav.addEventListener("mouseover", function (e) {
+//   handleHover(e, 0.5);
+// });
+nav.addEventListener("mouseover", handleHover.bind(0.5));
+nav.addEventListener("mouseout", handleHover.bind(1));
 
 //-------- H1 Dom traversing --------//
 // h1.querySelectorAll('.highlight')
