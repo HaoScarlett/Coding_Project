@@ -6,7 +6,7 @@ const h1 = document.querySelector("h1");
 const tabs = document.querySelectorAll(".operations__tab");
 const tabsContainer = document.querySelector(".operations__tab-container");
 const tabsContent = document.querySelectorAll(".operations__content");
-
+const nav = document.querySelector(".nav");
 //-------- Nav bar scroll --------//
 // Touch every link and add the same fn to them. It's not efficient.
 // document.querySelectorAll(".nav__link").forEach(function (el) {
@@ -27,6 +27,22 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
     document.querySelector(id).scrollIntoView({ behavior: "smooth" });
   }
 });
+
+//-------- Menu fade animation --------//
+nav.addEventListener("mouseover", function (e) {
+  if (e.target.classList.contains("nav__link")) {
+    const link = e.target;
+    // Use parent-children relationship to select all the nav links
+    const siblings = link.closest(".nav").querySelectorAll(".nav__link");
+    const logo = link.closest(".nav").querySelector("img");
+
+    siblings.forEach((el) => {
+      if (el !== link) el.style.opacity = 0.5;
+    });
+    logo.style.opacity = 0.5;
+  }
+});
+nav.addEventListener("mouseout", function (e) {});
 
 //-------- H1 Dom traversing --------//
 // h1.querySelectorAll('.highlight')
