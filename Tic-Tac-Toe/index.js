@@ -80,3 +80,4 @@ function incrementMove() {
     infoText.innerHTML = `${players.player2.name}'s turn`;
   }
 }
+
