@@ -147,4 +147,69 @@ function checkForTie() {
 }
 
 // Continue - Restart - Reset
+function continueGame() {
+  removeSquareClick();
+  setTimeout(() => {
+    reset();
+  }, 2000);
+}
 
+function restartGame() {
+  removeSquareClick();
+  reset();
+}
+
+function reset() {
+  allSquares.forEach((square) => {
+    square.classList = "grid__square";
+  });
+  addSquareClick();
+  playerHasWon = false;
+  infoText.innerHTML = `${nextPlayer}'s turn to start.👾`;
+}
+
+// Start
+function startGame() {
+  startGameBtn.addEventListener("click", () => {
+    model.style.display = "flex";
+  });
+  const form = document.querySelector("form");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const player1Input = document
+      .getElementById("player1")
+      .value.trim()
+      .toLowerCase();
+    const player2Input = document
+      .getElementById("player2")
+      .value.trim()
+      .toLowerCase();
+
+    const player1InputCap =
+      player1Input.charAt(0).toUpperCase() + player1Input.slice(1);
+    const player2InputCap =
+      player2Input.charAt(0).toUpperCase() + player2Input.slice(1);
+
+    players.player1.name = player1InputCap;
+    players.player2.name = player2InputCap;
+    nextPlayer = player1InputCap;
+
+    document.getElementById("info__player__name1").innerHTML =
+      players.player1.name;
+    document.getElementById("info__player__name2").innerHTML =
+      players.player2.name;
+
+    players.player1.wins = 0;
+    players.player2.wins = 0;
+    updateScores();
+
+    infoText.innerHTML = `${players.player1.name}'s turn to start!`;
+    model.style.display = "none";
+
+    startGameBtn.innerHTML = "Restart the Game";
+    addSquareClick();
+    restartGame();
+  });
+}
+
+startGame();
