@@ -137,7 +137,7 @@ h2:hover {
 }
 
 .grid__square {
-    background: var(--bg-white);
+    background-color: var(--bg-white);
     border-radius: 0.3rem;
     border: var(--border);
 }
