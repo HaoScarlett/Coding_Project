@@ -79,5 +79,72 @@ function incrementMove() {
     currentImage = "circle";
     infoText.innerHTML = `${players.player2.name}'s turn`;
   }
+  checkForWin();
+  checkForTie();
 }
+
+function checkForWin() {
+  const lines = [
+    [square1, square2, square3],
+    [square4, square5, square6],
+    [square7, square8, square9],
+    [square1, square4, square7],
+    [square2, square5, square8],
+    [square3, square6, square9],
+    [square1, square5, square9],
+    [square3, square5, square7],
+  ];
+
+  for (const line of lines) {
+    const hasCross = line.every((square) => square.classList.contains("cross"));
+    const hasCircle = line.every((square) =>
+      square.classList.contains("circle")
+    );
+    if (hasCross || hasCircle) {
+      const winner = hasCross ? players.player1 : players.player2;
+      winner.wins += 1;
+      updateScores();
+      playerWon();
+      return;
+    }
+  }
+}
+
+function updateScores() {
+  player1Score.innerHTML = players.player1.wins;
+  player2Score.innerHTML = players.player2.wins;
+}
+
+function playerWon() {
+  infoText.innerHTML = `${pastPlayer} won! 🥳`;
+  playerHasWon = true;
+  continueGame();
+}
+
+function checkForTie() {
+  const squares = [
+    square1,
+    square2,
+    square3,
+    square4,
+    square5,
+    square6,
+    square7,
+    square8,
+    square9,
+  ];
+
+  const allSquaresFilled = squares.every((square) => {
+    return (
+      square.classList.contains("cross") || square.classList.contains("circle")
+    );
+  });
+
+  if (allSquaresFilled && !playerHasWon) {
+    infoText.innerHTML = "It's a tie!";
+    continueGame();
+  }
+}
+
+// Continue - Restart - Reset
 
