@@ -8,7 +8,7 @@ const { getRandomElement } = require("./utils");
 const PORT = process.env.PORT || 4001;
 
 app.use(express.static("public"));
-
+app.use(morgan("dev"));
 // handle all routes
 
 // Send a random quote
@@ -40,6 +40,21 @@ app.get("/api/quotes/", (req, res) => {
   res.json({
     quotes: filteredQuotes,
   });
+});
+
+// Add new quotes (passed in a query string)
+app.post("/api/quotes", (req, res) => {
+  const quote = req.query.quote;
+  const person = req.query.person;
+  const newQuote = {};
+  if (quote && person) {
+    newQuote.quote = quote;
+    newQuote.person = person;
+    quotes.push(newQuote);
+    res.json({ quote: newQuote });
+  } else {
+    res.status(400).send();
+  }
 });
 
 app.listen(PORT, () => {
