@@ -44,19 +44,18 @@ app.get("/api/quotes/", (req, res) => {
 
 // Add new quotes (passed in a query string)
 app.post("/api/quotes", (req, res) => {
+  // const {quote, person} = req.body;
   const quote = req.query.quote;
   const person = req.query.person;
-
-  // Input validation
-  if (!quote && !person){
-    return res.status(400).json({message: "Missing required field: quote and person.})
-  };
-
-  const newQuote = {quote, person};
+  const newQuote = {};
+  if (quote && person) {
     newQuote.quote = quote;
     newQuote.person = person;
     quotes.push(newQuote);
-    res.status(200).json({ quote: newQuote });
+    res.json({ quote: newQuote });
+  } else {
+    res.status(400).send();
+  }
 });
 
 app.listen(PORT, () => {
