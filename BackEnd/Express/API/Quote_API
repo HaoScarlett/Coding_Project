@@ -1,0 +1,47 @@
+const express = require("express");
+const morgan = require("morgan");
+const app = express();
+
+const { quotes } = require("./data");
+const { getRandomElement } = require("./utils");
+
+const PORT = process.env.PORT || 4001;
+
+app.use(express.static("public"));
+
+// handle all routes
+
+// Send a random quote
+app.get("/api/quotes/random", (req, res, next) => {
+  // Generate a random index
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  // Get the random quote in JSON string form
+  const randomQuote = JSON.stringify(quotes[randomIndex]);
+  res.send(randomQuote);
+  console.log(randomQuote);
+});
+
+//
+app.get("/api/quotes/", (req, res) => {
+  // Destructure the person parameter from the query string
+  const { person } = req.query;
+  // Start with all quotes
+  let filteredQuotes = quotes;
+
+  // If 'person' param is provided
+  if (person) {
+    // filter quotes by the provided name
+    filteredQuotes = quotes.filter(
+      (quote) => quote.person.toLowerCase() === person.toLowerCase()
+    );
+  }
+
+  // Respond with filtered quotes
+  res.json({
+    quotes: filteredQuotes,
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PORT}.`);
+});
