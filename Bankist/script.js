@@ -71,7 +71,6 @@ const allSections = document.querySelectorAll(".section");
 
 const revealSection = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
 
   if (!entry.isIntersecting) return;
 
@@ -88,6 +87,28 @@ allSections.forEach(function (section) {
   section.classList.add("section--hidden");
 });
 
+// Lazy loading images
+const imgTargets = document.querySelectorAll("img[data-src]");
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  if(!entry.isIntersecting) return;
+  
+  // Replace src with data-src 
+  entry.target.src = entry.target.dataset.src;
+  
+  // Replace the images with higher quality ones
+  entry.target.addEventListener('load', function(){
+    entry.target.classList.remove('lazy-img');
+  })
+}
+
+const imgObserver = new IntersectionObserver(loadImg,{
+  root: null,
+  threshold: 0,
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
 //-------- H1 Dom traversing --------//
 // h1.querySelectorAll('.highlight')
 h1.firstElementChild.style.color = "white";
