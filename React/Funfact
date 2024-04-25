@@ -21,7 +21,7 @@ for (const animal in animals) {
       src={animals[animal].image}
       aria-label={animal}
       role="button"
-      onClick={displayFact(document.getElementById("fact"))}
+      onClick={() => displayFact(animal)}
     />
   );
 }
@@ -37,10 +37,9 @@ const animalFacts = (
 
 // handle displaying event
 function displayFact(e) {
-  const randomIndex = Math.floor(Math.random() * animalClicked.facts.length);
-  const animalClicked = e.target.alt;
-  const funFacts = animals[animalClicked].facts;
-  return funFacts[randomIndex];
+  const randomIndex = Math.floor(Math.random() * animals[animal].facts.length);
+  const factElement = document.getElementById("fact");
+  factElement.innerHTML = animals[animal].facts[randomIndex];
 }
 
 root.render(animalFacts);
