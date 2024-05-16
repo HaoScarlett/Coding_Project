@@ -12,28 +12,31 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
 if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      const { latitude } = position.coords;
-      const { longitude } = position.coords;
-      console.log(`https://www.google.ca/maps/@${latitude},${longitude}`);
+  navigator.geolocation.getCurrentPosition(function (position) {
+    const { latitude } = position.coords;
+    const { longitude } = position.coords;
+    console.log(`https://www.google.ca/maps/@${latitude},${longitude}`);
 
-      const coords = [latitude, longitude]
+    const coords = [latitude, longitude];
 
-      const map = L.map('map').setView([51.505, -0.09], 13);
+    const map = L.map('map').setView([51.505, -0.09], 13);
+    console.log(map);
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-      L.marker([51.5, -0.09])
-        .addTo(map)
-        .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-        .openPopup();
-    },
-    function () {
-      alert('Could not get your position');
-    }
-  );
+    L.marker([51.5, -0.09])
+      .addTo(map)
+      .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+      .openPopup();
+
+    map.on('click', function (mapEvent) {
+      console.log(mapEvent);
+    }),
+      function () {
+        alert('Could not get your position');
+      };
+  });
 }
